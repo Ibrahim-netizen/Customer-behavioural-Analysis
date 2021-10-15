@@ -6,9 +6,9 @@ An investigation on the behavioral pattern of customers based on their purchasin
 ## Aim and Objectives
 The end-goal of this research is aimed at leveraging R programming language and studio to 
 explore data visualization library tools in order to:
-• Validate the correlation between attributes of transactional data.
-• Demonstrate sales audit based on product purchased.
-• Visually demonstrate consumer purchasing power and buying habits.
+- Validate the correlation between attributes of transactional data.
+- Demonstrate sales audit based on product purchased.
+- Visually demonstrate consumer purchasing power and buying habits.
 
 ## Data Acquisition
 The transactional dataset incorporated into this exploratory analysis was retrieved from the repository of University of California, Irvine (UCI), a machine learning database archive that consists of assemblies of database and data generators created by David Aha in 1987 [7]. It consists of a year’s online retail transactions carried out within 01 December 2010 to 09 December 2011 for a UK-registered retail online website. This dataset was gathered from an online dealer that trades assorted gifts with wholesales customers sourced by Dr Daqing Chen, Public analytics Director at the Engineering school at London South Bank University [6]. 
