@@ -1,0 +1,60 @@
+setwd('C:/Users/giwai/Downloads')
+Data<-read.csv('Online Data.csv')
+
+#Use indexing to select rows needed by Monthly online sales report in November
+Data2<-Data[1:42482, ]
+
+#Remove missing CustomerID using Complete.case as we cannot determine which customer bought what even if we generate random characters as each ID is unique and are characters, NOT integers
+Data3<-Data2[complete.cases(Data2), ]
+#View(Data2)
+#summary(Data2)
+
+Data3<-Data3[Data3$Quantity >= 0, ]
+
+#remove cancelled order from dataset
+library(stringr)
+str_replace_all(Data2$ï..InvoiceNo, "c?-@/", "")
+
+#using lubridate library to convert date format for time series analysis
+library(lubridate)
+InvoiceDate_Data3<-parse_date_time(Data3[,5], orders = "%d/%m/%y %H:%M")
+Data3$InvoiceDate<-InvoiceDate_Data3
+Data3$InvoiceDate<-format(Data3$InvoiceDate, format = "%a %d %b %Y")
+
+aggData<-data3[complete.cases(data3), ]
+str(aggData)
+summary(aggData)
+unique(aggData$Country)
+
+#remove negatives
+aggData<-aggData[aggData$TotalQuantity >= 0, ]
+
+#remove cancelled order from dataset
+library(stringr)
+str_replace_all(aggData$?..InvoiceNo, "c?-@/", "")
+
+library(ggplot2)
+
+#right skewed density chart (positive skewness)
+#density to understand the distribution of dataset
+ggplot(aggData, aes(x = TotalQuantity)) + geom_density(aes(fill = "NetPrice"), colour = "steel blue") + xlab("Total Quantity of Products") + ggtitle('Density of Purchased Retail Products')
+
+library(scatterplot3d)
+scatterplot3d(aggData$TotalQuantity, aggData$CustomerID, aggData$NetPrice, pch = 16, color="steelblue") 
+
+ggplot(aggData, aes(x = NetPrice)) + geom_density(colour = "green")
+
+ggplot(aggData, aes(x= CustomerID, y= NetPrice)) + geom_line()
+
+#removing the non-numeric attribute which are Country and InvoiceDate
+aggData<-aggData[, -5]
+aggData<-aggData[, -5]
+
+#correlation 
+M<-cor(aggData)
+library(corrplot)
+corrplot(M, method = "circle")
+corrplot.mixed(M, lower.col = "black", number.cex = .7)
+
+whiteblack <- c("white", "black")
+corrplot(M, order = "hclust", addrect = 2, col = whiteblack, bg = "gold2")
